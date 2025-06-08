@@ -150,7 +150,7 @@ $query = mysqli_query($con, "SELECT ProductName, COUNT(*) AS product_count, ID, 
 		<?php include_once('includes/footer.php');?>
 
   <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script> 
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery.easing.1.3.js"></script>
