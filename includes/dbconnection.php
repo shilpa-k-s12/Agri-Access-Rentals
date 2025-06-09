@@ -1,3 +1,4 @@
+<?php
 $con = mysqli_connect(
     "shortline.proxy.rlwy.net", // Host
     "root",                     // Username
@@ -5,3 +6,8 @@ $con = mysqli_connect(
     "railway",                  // Database
     13306                       // Port
 );
+
+if (mysqli_connect_errno()) {
+    echo "Connection Fail: " . mysqli_connect_error();
+}
+?>
