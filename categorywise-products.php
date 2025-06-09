@@ -10,7 +10,6 @@ include('includes/dbconnection.php');
     <title>Agriculture Equipment Rental Management System - Shopping Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
   </head>
@@ -34,62 +33,55 @@ include('includes/dbconnection.php');
           <?php
           $cid = $_GET['catid'];
 
-          // Getting the current page number
           $pageno = isset($_GET['pageno']) ? $_GET['pageno'] : 1;
           $no_of_records_per_page = 8;
           $offset = ($pageno - 1) * $no_of_records_per_page;
 
-          // Getting the category name
           $category_query = mysqli_query($con, "SELECT CategoryName FROM tblcategory WHERE ID='$cid'");
           $category = mysqli_fetch_array($category_query)['CategoryName'];
 
-          // Getting total product count
-          $product_count_query = mysqli_query($con, "SELECT COUNT(*) AS product_count FROM tblproduct WHERE CategoryID='$cid'");
+          $product_count_query = mysqli_query($con, "SELECT COUNT(*) AS product_count FROM tblproduct WHERE CategoryID='$cid' AND Image IS NOT NULL AND Image <> ''");
           $product_count = mysqli_fetch_array($product_count_query)['product_count'];
 
-          // Fetching products with pagination
-          $query = mysqli_query($con, "SELECT ProductName, ID, RentPrice, Image FROM tblproduct WHERE CategoryID='$cid' LIMIT $offset, $no_of_records_per_page");
-
+          $query = mysqli_query($con, "SELECT ProductName, ID, RentPrice, Image FROM tblproduct WHERE CategoryID='$cid' AND Image IS NOT NULL AND Image <> '' LIMIT $offset, $no_of_records_per_page");
           ?>
 
-          <h2 class="category-name"><?php echo $category . " (" . $product_count . " products)"; ?></h2>
+          <h2 class="category-name mb-4"><?php echo htmlentities($category) . " (" . htmlentities($product_count) . " products)"; ?></h2>
 
           <?php if(mysqli_num_rows($query) > 0) { ?>
             <div class="row">
-              <?php
-              while ($row = mysqli_fetch_array($query)) {
-              ?>
+              <?php while ($row = mysqli_fetch_array($query)) { ?>
                 <div class="col-md-6 col-lg-3 ftco-animate">
                   <div class="product">
-                    <a href="single-product-details.php?viewid=<?php echo $row['ID']; ?>" class="img-prod">
-                      <img class="img-fluid" src="admin/images/<?php echo $row['Image']; ?>" alt="Product Image">
+                    <a href="single-product-details.php?viewid=<?php echo htmlentities($row['ID']); ?>" class="img-prod">
+                      <img class="img-fluid" 
+                           src="admin/images/<?php echo htmlentities($row['Image']); ?>" 
+                           onerror="this.onerror=null;this.src='images/noimage.png';" 
+                           alt="Product Image">
                       <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                      <h3><a href="single-product-details.php?viewid=<?php echo $row['ID']; ?>"><?php echo $row['ProductName']; ?></a></h3>
+                      <h3><a href="single-product-details.php?viewid=<?php echo htmlentities($row['ID']); ?>"><?php echo htmlentities($row['ProductName']); ?></a></h3>
                       <div class="d-flex">
                         <div class="pricing">
-                          <p class="price"><span class="price-sale">Rs <?php echo $row['RentPrice']; ?>/day</span></p>
+                          <p class="price"><span class="price-sale">Rs <?php echo htmlentities($row['RentPrice']); ?>/day</span></p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              <?php 
-              } 
-              ?>
+              <?php } ?>
             </div>
           <?php } else { ?>
             <hr>
             <div class="row mt-5">
               <div class="col text-center">
                 <div class="page-pagi">
-                  <p>No products available in this category right now. New stock will be available in **one week**! Check back soon.</p>
+                  <p>No products available in this category right now. New stock will be available in <strong>one week</strong>! Check back soon.</p>
                 </div>
               </div>
             </div>
           <?php } ?>
-
         </div>
 
         <div class="row mt-5">
@@ -97,14 +89,14 @@ include('includes/dbconnection.php');
             <div class="page-pagi">
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                  <li class="page-item"><a class="page-link" href="?pageno=1"><strong>First</strong></a></li>
+                  <li class="page-item"><a class="page-link" href="?catid=<?php echo $cid; ?>&pageno=1"><strong>First</strong></a></li>
                   <li class="page-item <?php echo ($pageno <= 1) ? 'disabled' : ''; ?>">
-                    <a class="page-link" href="<?php echo ($pageno <= 1) ? '#' : "?pageno=" . ($pageno - 1); ?>"><strong>Prev</strong></a>
+                    <a class="page-link" href="<?php echo ($pageno <= 1) ? '#' : "?catid=$cid&pageno=" . ($pageno - 1); ?>"><strong>Prev</strong></a>
                   </li>
                   <li class="page-item <?php echo ($pageno >= ceil($product_count / $no_of_records_per_page)) ? 'disabled' : ''; ?>">
-                    <a class="page-link" href="<?php echo ($pageno >= ceil($product_count / $no_of_records_per_page)) ? '#' : "?pageno=" . ($pageno + 1); ?>"><strong>Next</strong></a>
+                    <a class="page-link" href="<?php echo ($pageno >= ceil($product_count / $no_of_records_per_page)) ? '#' : "?catid=$cid&pageno=" . ($pageno + 1); ?>"><strong>Next</strong></a>
                   </li>
-                  <li class="page-item"><a class="page-link" href="?pageno=<?php echo ceil($product_count / $no_of_records_per_page); ?>"><strong>Last</strong></a></li>
+                  <li class="page-item"><a class="page-link" href="?catid=<?php echo $cid; ?>&pageno=<?php echo ceil($product_count / $no_of_records_per_page); ?>"><strong>Last</strong></a></li>
                 </ul>
               </nav>
             </div>
