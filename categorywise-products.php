@@ -82,7 +82,7 @@ $query = mysqli_query($con, "SELECT tblproduct.ID, tblproduct.CategoryID, tblpro
 
 <!-- Display Category Name -->
 <h2 class="category-name"><?php echo $category; ?></h2>
-
+<p class="text-muted text-center mb-4"><?php echo $total_rows; ?> product(s) found in this category.</p>
 <?php if(mysqli_num_rows($query) > 0) { ?>
     <div class="row">
     <?php
