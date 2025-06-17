@@ -91,7 +91,7 @@ $query = mysqli_query($con, "SELECT tblproduct.ID, tblproduct.CategoryID, tblpro
         <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="product">
                 <a href="single-product-details.php?viewid=<?php echo $row['ID']; ?>" class="img-prod">
-                    <img class="img-fluid" src="admin/images/<?php echo $row['Image']; ?>" alt="Product Image">
+                    <img class="img-fluid product-img" src="admin/images/<?php echo $row['Image']; ?>" alt="Product Image">
                     <div class="overlay"></div>
                 </a>
                 <div class="text py-3 pb-4 px-3 text-center">
