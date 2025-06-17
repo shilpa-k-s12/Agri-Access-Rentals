@@ -19,14 +19,13 @@ if (isset($_POST['login'])) {
     // Verify password
     if ($userID && $hashedPassword === md5($password)) {
         $_SESSION['uid'] = $userID;
-        header('Location: about.php');
+        header('Location: aboutus.php');
         exit();
     } else {
         echo "<script>alert('Invalid details');</script>";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
