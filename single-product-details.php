@@ -82,7 +82,7 @@ while ($row=mysqli_fetch_array($ret)) {
 							</p>
 						
 						</div>
-    				<p class="price"><span> Rent Price: $<?php echo $row['RentPrice'];?>/day</span></p>
+    				<p class="price"><span> Rent Price: Rs<?php echo $row['RentPrice'];?>/day</span></p>
     				<p>Model Number : <?php echo $row['ModelNumber'];?>
 						</p>
 						<p>Power Source: <?php echo $row['PowerSource'];?>.
