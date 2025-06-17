@@ -85,9 +85,10 @@ $query = mysqli_query($con, "SELECT tblproduct.ID, tblproduct.CategoryID, tblpro
 <p>Total Products Available: <?php echo $total_rows; ?></p>
 <?php if(mysqli_num_rows($query) > 0) { ?>
     <div class="row">
-    <?php
-    while ($row = mysqli_fetch_array($query)) {
-    ?>
+	<div class="col-12 text-center">
+    <p><strong>Total Products in this Category: <?php echo $total_rows; ?></strong></p>
+</div>			       
+ <?php while ($row = mysqli_fetch_array($query)) { ?>
         <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="product">
                 <a href="single-product-details.php?viewid=<?php echo $row['ID']; ?>" class="img-prod">
@@ -120,7 +121,6 @@ $query = mysqli_query($con, "SELECT tblproduct.ID, tblproduct.CategoryID, tblpro
     <?php 
     } 
     ?>
-    </div>
 <?php } else { ?>
   <hr>
     <!-- No Products Available Message -->
