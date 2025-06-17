@@ -17,7 +17,7 @@ if (isset($_POST['login'])) {
     mysqli_stmt_close($stmt);
 
     // Verify password
-    if ($userID && password_verify($password, $hashedPassword)) {
+    if ($userID && $hashedPassword === md5($password)) {
         $_SESSION['uid'] = $userID;
         header('Location: about.php');
         exit();
