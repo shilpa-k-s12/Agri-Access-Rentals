@@ -7,7 +7,7 @@ include('includes/dbconnection.php');
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Agriculture Equipment Rental Management System|| Home Page</title>
+    <title>Agri Access Rentals|| Home Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -45,8 +45,8 @@ include('includes/dbconnection.php');
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 	            <div class="col-md-12 ftco-animate text-center">
-	              <h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
-	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
+	              <h1 class="mb-2">We provide tools &amp; machines</h1>
+	              <h2 class="subheading mb-4">Redefining Agriculture with cost effective tools &amp; machines</h2>
 	              <p><a href="#" class="btn btn-primary">View Details</a></p>
 	            </div>
 
@@ -60,8 +60,8 @@ include('includes/dbconnection.php');
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 	            <div class="col-sm-12 ftco-animate text-center">
-	              <h1 class="mb-2">100% Fresh &amp; Organic Foods</h1>
-	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
+	              <h1 class="mb-2">Revolutinizing Farming &amp; growth</h1>
+	              <h2 class="subheading mb-4">Easy Rentals &amp; Delivery</h2>
 	              <p><a href="#" class="btn btn-primary">View Details</a></p>
 	            </div>
 
@@ -81,7 +81,7 @@ include('includes/dbconnection.php');
               </div>
               <div class="media-body">
                 <h3 class="heading">Free Shipping</h3>
-                <span>On order over $100</span>
+                <span>On order over Rs2000</span>
               </div>
             </div>      
           </div>
@@ -91,8 +91,8 @@ include('includes/dbconnection.php');
             		<span class="flaticon-diet"></span>
               </div>
               <div class="media-body">
-                <h3 class="heading">Always Fresh</h3>
-                <span>Product well package</span>
+                <h3 class="heading">Always Innovative</h3>
+                <span>Product well delivered</span>
               </div>
             </div>    
           </div>
