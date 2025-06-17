@@ -7,7 +7,7 @@ include('includes/dbconnection.php');
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Agri Access Rentals- Shoping Page</title>
+    <title>Agriculture Equipment Rental Management Sysytem - Shoping Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -69,8 +69,7 @@ $offset = ($pageno - 1) * $no_of_records_per_page;
 // Getting the category name
 $category_query = mysqli_query($con, "SELECT CategoryName FROM tblcategory WHERE ID='$cid'");
 $category = mysqli_fetch_array($category_query)['CategoryName'];
-$product_count_query = mysqli_query($con, "SELECT COUNT(*) AS product_count FROM tblproduct WHERE CategoryID='$cid'");
-$product_count = mysqli_fetch_array($product_count_query)['product_count'];
+
 // Getting the total number of pages
 $total_pages_sql = "SELECT COUNT(*) FROM tblproduct WHERE CategoryID='$cid'";
 $ret1 = mysqli_query($con, $total_pages_sql);
@@ -78,16 +77,16 @@ $total_rows = mysqli_fetch_array($ret1)[0];
 $total_pages = ceil($total_rows / $no_of_records_per_page);
 
 // Fetching the products for the current page
-$query = mysqli_query($con, "SELECT ProductName, COUNT(*) AS product_count, ID, RentPrice, Image FROM tblproduct WHERE CategoryID='$cid' GROUP BY ProductName");
+$query = mysqli_query($con, "SELECT tblproduct.ID, tblproduct.CategoryID, tblproduct.SubcategoryID, tblproduct.ProductName, tblproduct.ModelNumber, tblproduct.PowerSource, tblproduct.RentPrice, tblproduct.ProductSpecifications, tblproduct.ProductDescription, tblproduct.Image, tblproduct.Image1, tblproduct.Image2, tblproduct.Image3, tblproduct.Image4, tblproduct.Image5, tblcategory.CategoryName, tblsubcategory.SubcategoryName FROM tblproduct JOIN tblcategory ON tblcategory.ID = tblproduct.CategoryID JOIN tblsubcategory ON tblsubcategory.ID = tblproduct.SubcategoryID WHERE tblproduct.CategoryID='$cid' LIMIT $offset, $no_of_records_per_page");
 ?>
 
 <!-- Display Category Name -->
+<h2 class="category-name"><?php echo $category; ?></h2>
 
-<h2 class="category-name"><?php echo $category . " (" . $product_count . " products)"; ?></h2>
 <?php if(mysqli_num_rows($query) > 0) { ?>
     <div class="row">
     <?php
-   while ($row = mysqli_fetch_array($query)) {
+    while ($row = mysqli_fetch_array($query)) {
     ?>
         <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="product">
@@ -97,32 +96,46 @@ $query = mysqli_query($con, "SELECT ProductName, COUNT(*) AS product_count, ID, 
                 </a>
                 <div class="text py-3 pb-4 px-3 text-center">
                     <h3><a href="single-product-details.php?viewid=<?php echo $row['ID']; ?>"><?php echo $row['ProductName']; ?></a></h3>
-                    <p><strong>Available Units:</strong> <?php echo $row['product_count']; ?></p>
                     <div class="d-flex">
                         <div class="pricing">
                             <p class="price"><span class="price-sale">Rs <?php echo $row['RentPrice']; ?>/day</span></p>
+                        </div>
+                    </div>
+                    <div class="bottom-area d-flex px-3">
+                        <div class="m-auto d-flex">
+                            <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                <span><i class="ion-ios-menu"></i></span>
+                            </a>
+                            <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                <span><i class="ion-ios-cart"></i></span>
+                            </a>
+                            <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                                <span><i class="ion-ios-heart"></i></span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     <?php 
-    }
-    ?>
+    } 
     ?>
     </div>
-<?php } if(mysqli_num_rows($query) > 0) { ?>
-    <!-- Code to display products -->
 <?php } else { ?>
-    <hr>
-    <div class="row mt-5">
-        <div class="col text-center">
+  <hr>
+    <!-- No Products Available Message -->
+ 
+
+                
+             
+              <div class="row mt-5">
+          <div class="col text-center">
             <div class="page-pagi">
-                <p>No products available in this category right now. But don't worry, new stock will be available in **one week**! Check back soon.</p>
-            </div>
+                         <p>No products available in this category.</p>
+                    </div>
+          </div>
         </div>
-    </div>
-        
+         
 <?php } ?>
 </div>
     		<div class="row mt-5">
